@@ -1,4 +1,2 @@
-github.com/lukluk/pkcs-validator v0.0.0-20241007024832-96b2dfe59ead h1:G/e1rvl8xhxAPgRn5FCOvwAlq02isT+0rHK5Xgqyrwc=
-github.com/lukluk/pkcs-validator v0.0.0-20241007024832-96b2dfe59ead/go.mod h1:kRvFEUtI0zX38WWxGsHkcbH9UJslOjf8G5Q0AQ7W5wk=
 github.com/sidra-gateway/go-pdk v1.0.3 h1:hntDyXVRctsMRb3zH86Hu70QvLALsB3tzLtcNeMKDmM=
 github.com/sidra-gateway/go-pdk v1.0.3/go.mod h1:b/zEmCfb0kEzg/rmDGFYbB4kSMb80KAAXV8904OcQ2w=
