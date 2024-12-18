@@ -2,13 +2,13 @@ package lib
 
 import (
 	"crypto"
-	//"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/pem"
 	"errors"
+	"log"
 )
 
 // Interface untuk verifikasi tanda tangan
@@ -23,15 +23,18 @@ func (s *SignatureTypePKCS) Verify(pubKey *rsa.PublicKey, msg string, base64Sign
 	message := []byte(msg)
 	bSignature, err := base64.StdEncoding.DecodeString(base64Signature)
 	if err != nil {
+		log.Printf("ERROR: Failed to decode signature: %v\n", err)
 		return errors.New("failed to decode signature")
 	}
 
 	hashed := sha256.Sum256(message)
 	err = rsa.VerifyPKCS1v15(pubKey, crypto.SHA256, hashed[:], bSignature)
 	if err != nil {
+		log.Printf("ERROR: PKCS signature verification failed: %v\n", err)
 		return errors.New("signature verification failed")
 	}
 
+	log.Println("INFO: PKCS signature verification successful")
 	return nil
 }
 
@@ -42,15 +45,18 @@ func (s *SignatureTypePSS) Verify(pubKey *rsa.PublicKey, msg string, base64Signa
 	message := []byte(msg)
 	bSignature, err := base64.StdEncoding.DecodeString(base64Signature)
 	if err != nil {
+		log.Printf("ERROR: Failed to decode signature: %v\n", err)
 		return errors.New("failed to decode signature")
 	}
 
 	hashed := sha256.Sum256(message)
 	err = rsa.VerifyPSS(pubKey, crypto.SHA256, hashed[:], bSignature, nil)
 	if err != nil {
+		log.Printf("ERROR: PSS signature verification failed: %v\n", err)
 		return errors.New("signature verification failed")
 	}
 
+	log.Println("INFO: PSS signature verification successful")
 	return nil
 }
 
@@ -58,18 +64,22 @@ func (s *SignatureTypePSS) Verify(pubKey *rsa.PublicKey, msg string, base64Signa
 func ParseRsaPublicKeyFromPemStr(pubPEM string) (*rsa.PublicKey, error) {
 	block, _ := pem.Decode([]byte(pubPEM))
 	if block == nil {
+		log.Println("ERROR: Failed to parse PEM block containing the key")
 		return nil, errors.New("failed to parse PEM block containing the key")
 	}
 
 	pub, err := x509.ParsePKIXPublicKey(block.Bytes)
 	if err != nil {
+		log.Printf("ERROR: Failed to parse public key: %v\n", err)
 		return nil, err
 	}
 
 	switch pub := pub.(type) {
 	case *rsa.PublicKey:
+		log.Println("INFO: Public key successfully parsed")
 		return pub, nil
 	default:
+		log.Println("ERROR: Key type is not RSA")
 		return nil, errors.New("key type is not RSA")
 	}
 }
