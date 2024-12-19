@@ -6,12 +6,18 @@ import (
 	"os"
 
 	"github.com/sidra-gateway/go-pdk/server"
-	"github.com/sidra-gateway/plugin-rsa/lib" //Library untuk RSA validation
+	"github.com/sidra-api/plugin-rsa/lib" //Library untuk RSA validation
 )
 
 func main() {
-	log.Println("INFO: Starting RSA Validator Plugin...")
-	rsaValidator := server.NewServer("rsa-validator", handleRequest)
+	// Ambil nama plugin dari variabel lingkungan PLUGIN_NAME, gunakan default jika kosong
+	pluginName := os.Getenv("PLUGIN_NAME")
+	if pluginName == "" {
+		pluginName = "rsa-validator"
+	}
+
+	log.Printf("INFO: Starting RSA Validator Plugin %s...\n", pluginName)
+	rsaValidator := server.NewServer(pluginName, handleRequest)
 	if err := rsaValidator.Start(); err != nil {
 		log.Fatalf("ERROR: Failed to start server: %v\n", err)
 	}

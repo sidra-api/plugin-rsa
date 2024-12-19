@@ -26,7 +26,7 @@ The plugin ensures that incoming requests contain valid digital signatures to ve
 ## Prerequisites
 
 - Golang must be installed.
-- Sidra Api and Sidra Plugins Hub are properly configured.
+- Sidra Api is properly configured.
 - A valid RSA public key in PEM format is required.
 
 ## Environment Variables

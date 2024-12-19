@@ -1,4 +1,2 @@
 github.com/sidra-gateway/go-pdk v1.0.4 h1:8057Xo0pt2oFHIJYODCOBLKjvggk+Iey1OanlEhnE00=
 github.com/sidra-gateway/go-pdk v1.0.4/go.mod h1:b/zEmCfb0kEzg/rmDGFYbB4kSMb80KAAXV8904OcQ2w=
-github.com/sidra-gateway/plugin-rsa v0.0.0-20241212073042-4759d84b5dbd h1:0QYCMD9m/dlkENRF1WjZpXIEKlamAw47oUdVgeqzL6g=
-github.com/sidra-gateway/plugin-rsa v0.0.0-20241212073042-4759d84b5dbd/go.mod h1:5RwBt886OLRldfbh4/Bhdv4q+lqaS2h0S+zFv3GLCSk=
