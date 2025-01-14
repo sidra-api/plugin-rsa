@@ -13,7 +13,7 @@ func main() {
 	// Ambil nama plugin dari variabel lingkungan PLUGIN_NAME, gunakan default jika kosong
 	pluginName := os.Getenv("PLUGIN_NAME")
 	if pluginName == "" {
-		pluginName = "rsa-validator"
+		pluginName = "rsa"
 	}
 
 	log.Printf("INFO: Starting RSA Validator Plugin %s...\n", pluginName)
